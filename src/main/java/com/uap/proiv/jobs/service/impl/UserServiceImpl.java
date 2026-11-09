@@ -6,6 +6,7 @@ import com.uap.proiv.jobs.dto.UserApiResponse;
 import com.uap.proiv.jobs.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.uap.proiv.jobs.dto.UserCreateRequest;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -42,5 +43,19 @@ public class UserServiceImpl implements UserService {
         } catch (Exception e) {
             throw new RuntimeException("Error al crear el usuario: " + e.getMessage(), e);
         }
+    }
+
+    @Override
+    public User createUser(UserCreateRequest request) {
+        User newUser = new User();
+        newUser.setId((int) (System.currentTimeMillis() % 100000));
+        newUser.setEmail(request.getEmail());
+        newUser.setFirstName(request.getFirstName());
+        newUser.setLastName(request.getLastName());
+        newUser.setAvatar(request.getAvatar());
+        if (request.getJobId() != null) {
+            newUser.setJobId(request.getJobId());
+        }
+        return newUser;
     }
 }
