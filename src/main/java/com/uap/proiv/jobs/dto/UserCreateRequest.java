@@ -19,14 +19,14 @@ public class UserCreateRequest {
     public String getFirstName() {
         return firstName;
     }
-    public void setFirstName(String firstName) {
+    public void setFirst_Name(String firstName) {
         this.firstName = firstName;
     }
 
     public String getLastName() {
         return lastName;
     }
-    public void setLastName(String lastName) {
+    public void setLast_Name(String lastName) {
         this.lastName = lastName;
     }
 
@@ -40,8 +40,8 @@ public class UserCreateRequest {
     public Integer getJobId() {
         return jobId;
     }
-    public void setJobId(Integer jobId) {
+    public void setJob_Id(Integer jobId) {
         this.jobId = jobId;
     }
-    
+
 }
