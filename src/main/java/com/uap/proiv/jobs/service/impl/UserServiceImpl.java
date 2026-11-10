@@ -6,7 +6,7 @@ import com.uap.proiv.jobs.dto.UserApiResponse;
 import com.uap.proiv.jobs.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.uap.proiv.jobs.dto.UserCreateRequest;
+import com.uap.proiv.jobs.dto.UserRequest;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -46,16 +46,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User createUser(UserCreateRequest request) {
-        User newUser = new User();
-        newUser.setId((int) (System.currentTimeMillis() % 100000));
-        newUser.setEmail(request.getEmail());
-        newUser.setFirstName(request.getFirstName());
-        newUser.setLastName(request.getLastName());
-        newUser.setAvatar(request.getAvatar());
+    public User create(UserRequest request) {
+        User user = new User();
+        user.setEmail(request.getEmail());
+        user.setFirstName(request.getFirstName());
+        user.setLastName(request.getLastName());
+        user.setAvatar(request.getAvatar());
         if (request.getJobId() != null) {
-            newUser.setJobId(request.getJobId());
+            user.setJobId(request.getJobId());
         }
-        return newUser;
+        return userApiRepository.createUser(user);
     }
 }

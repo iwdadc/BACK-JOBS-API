@@ -117,5 +117,41 @@ public class UserApiRepository {
         }
     }
 
-}
+    public User createUser(User user) {
+        try {
+            Map<String, String> userMap = new HashMap<>();
+            userMap.put("name", user.getFirstName());
+            userMap.put("job", user.getLastName());
+            String requestBody = objectMapper.writeValueAsString(userMap);
 
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(baseUrl))
+                    .header("Accept", "application/json")
+                    .header("X-API-KEY", apiKey)
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(requestBody))
+                    .build();
+
+            HttpResponse<String> response = httpClient.send(
+                    request,
+                    HttpResponse.BodyHandlers.ofString()
+            );
+
+            if (response.statusCode() != 201) {
+                throw new RuntimeException("Error en ReqRes API. Código: " + response.statusCode());
+            }
+
+            // ReqRes devuelve el id; el resto lo completamos con lo que mandó el cliente
+            User created = objectMapper.readValue(response.body(), User.class);
+            created.setEmail(user.getEmail());
+            created.setFirstName(user.getFirstName());
+            created.setLastName(user.getLastName());
+            created.setAvatar(user.getAvatar());
+            created.setJobId(user.getJobId());
+            return created;
+        } catch (Exception e) {
+            throw new RuntimeException("Error al crear el usuario en la API: " + e.getMessage(), e);
+        }
+    }
+
+}

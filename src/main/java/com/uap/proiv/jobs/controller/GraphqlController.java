@@ -55,7 +55,7 @@ public class GraphqlController {
     }
 
     @MutationMapping
-    public User createUser(@Argument("request") UserCreateRequest request) {
-        return userService.createUser(request);
+    public User addUser(@Argument UserRequest request) {
+        return userService.create(request);
     }
 }

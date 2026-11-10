@@ -1,13 +1,13 @@
 package com.uap.proiv.jobs.dto;
 
-public class UserCreateRequest {
+public class UserRequest {
     private String email;
     private String firstName;
     private String lastName;
     private String avatar;
     private Integer jobId;
 
-    public UserCreateRequest() {}
+    public UserRequest() {}
 
     public String getEmail() {
         return email;
@@ -23,7 +23,7 @@ public class UserCreateRequest {
         this.firstName = firstName;
     }
   
-    public void setFirst_name(String firstName) {
+    public void setFirstname(String firstName) {
         this.firstName = firstName;
     }
 
@@ -33,7 +33,7 @@ public class UserCreateRequest {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-    public void setLast_name(String lastName) {
+    public void setLastname(String lastName) {
         this.lastName = lastName;
     }
 
@@ -50,7 +50,7 @@ public class UserCreateRequest {
     public void setJobId(Integer jobId) {
         this.jobId = jobId;
     }
-    public void setJob_id(Integer jobId) {
+    public void setJobid(Integer jobId) {
         this.jobId = jobId;
     }
 }
